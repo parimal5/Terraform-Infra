@@ -65,12 +65,24 @@ variable "ebs-size" {
   description = "This is EBS size"
 }
 
-variable "ebs-type" {
+variable "ebs_type" {
   type        = string
   description = "This is EBS Type"
 }
 
-variable "ebs-encryption" {
+variable "ebs_encryption" {
   type        = bool
   description = "This is encription variable"
+}
+
+
+variable "ENV" {
+  type        = string
+  description = "This value defines the Environement of our Infra"
+}
+
+
+variable "ami" {
+  type        = string
+  description = "This is the AMI used"
 }

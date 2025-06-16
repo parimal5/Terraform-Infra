@@ -41,3 +41,5 @@ EC2 Instance
 
 
     ` terraform plan -var-file="prod.tfvars" `
+
+![alt text](image.png)
