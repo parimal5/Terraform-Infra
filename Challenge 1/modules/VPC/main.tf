@@ -2,7 +2,7 @@ resource "aws_vpc" "VPC1" {
   cidr_block = var.cidr_block_VPC
 
   tags = {
-    Name = "PROD"
+    Name = var.ENV
   }
 }
 
@@ -11,7 +11,7 @@ resource "aws_subnet" "public_subnet_1" {
   cidr_block = var.cidr_block_subnet_1
 
   tags = {
-    Name = "PROD"
+    Name = var.ENV
   }
 }
 
@@ -19,7 +19,7 @@ resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.VPC1.id
 
   tags = {
-    Name = "PROD"
+    Name = var.ENV
   }
 }
 
@@ -39,7 +39,7 @@ resource "aws_route_table" "awsRT" {
   }
 
   tags = {
-    Name = "PROD"
+    Name = var.ENV
   }
 }
 
