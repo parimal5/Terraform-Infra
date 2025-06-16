@@ -9,7 +9,10 @@ terraform {
       source = "hashicorp/aws"
     }
   }
-  backend "s3" {
-
-  }
+  # backend "s3" {
+  #! This thee things are should be mentioned here OR /environments/PORD/backend/backend-prod.conf
+  # bucket = "my-tf-state-prod"
+  # key    = "prod/terraform.tfstate"
+  # region = "us-east-1"
+  # }
 }

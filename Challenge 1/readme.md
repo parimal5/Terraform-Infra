@@ -38,3 +38,6 @@ EC2 Instance
     Public IP of EC2
 
     VPC ID and Subnet ID
+
+
+    ` terraform plan -var-file="prod.tfvars" `

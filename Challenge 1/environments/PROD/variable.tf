@@ -7,6 +7,16 @@ variable "vpc_id" {
   type        = string
   description = "This is the VPC ID"
 }
+
+variable "cidr_block_VPC" {
+  type        = string
+  description = "This is the VPC CIDR Block"
+}
+variable "cidr_block_subnet_1" {
+  type        = string
+  description = "This is the Subnet 1 CIDR Block"
+}
+
 variable "ingress_rules" {
   description = "List of ingress rules"
   type = list(object({
@@ -30,11 +40,3 @@ variable "egress_rules" {
 }
 
 
-variable "cidr_block_VPC" {
-  type        = string
-  description = "This is the VPC CIDR Block"
-}
-variable "cidr_block_subnet_1" {
-  type        = string
-  description = "This is the Subnet 1 CIDR Block"
-}
