@@ -50,17 +50,12 @@ variable "key_pair_name" {
   description = "This is the key_pair_name type"
 }
 
-variable "sg" {
-  type        = string
-  description = "This is the Security Group"
-}
-
 variable "publicIP" {
   type        = bool
   description = "This is the public IP status"
 }
 
-variable "ebs-size" {
+variable "ebs_size" {
   type        = number
   description = "This is EBS size"
 }
@@ -78,11 +73,16 @@ variable "ebs_encryption" {
 
 variable "ENV" {
   type        = string
-  description = "This value defines the Environement of our Infra"
+  description = "This value defines the root"
 }
 
 
-variable "ami" {
+variable "file_name" {
   type        = string
-  description = "This is the AMI used"
+  description = "This is the  File Name"
+}
+
+variable "inputFile" {
+  type        = string
+  description = "This is the bash script"
 }

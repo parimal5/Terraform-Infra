@@ -13,7 +13,7 @@ resource "aws_security_group" "web_app_sg" {
 # - So we convert list of objects to a map using index as key
 # - The index key is just a placeholder to satisfy `for_each`'s map requirement
 
-resource "aws_vpc_security_group_ingress_rule" "ingress rule" {
+resource "aws_vpc_security_group_ingress_rule" "ingress_rule" {
   security_group_id = aws_security_group.web_app_sg.id
 
   for_each = { for index, obj in var.ingress_rules : index => obj }

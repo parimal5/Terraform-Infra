@@ -18,7 +18,7 @@ variable "subnet_id" {
 }
 
 variable "security_groups" {
-  type        = string
+  type        = list(string)
   description = "This is the Security Group"
 }
 
@@ -44,5 +44,10 @@ variable "ebs_encryption" {
 
 variable "ENV" {
   type        = string
-  description = "This value defines the Environement of our Infra"
+  description = "This value defines the module"
+}
+
+variable "inputFile" {
+  type        = string
+  description = "This is the bash script"
 }
