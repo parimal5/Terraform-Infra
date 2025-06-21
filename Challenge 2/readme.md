@@ -1,45 +1,69 @@
-✅ Challenge 1: Basic EC2 App Deployment (Start Small)
-🎯 Goal:
-Provision an EC2 instance in a public subnet, install a simple web application, and expose it to the internet.
+✅ Challenge 2: Public ALB + Private EC2 in a Secure 3-Tier Setup
+🎯 Goal
+Design an infrastructure that:
 
-📦 Requirements:
-VPC Setup
+Hosts an internet-facing Application Load Balancer (ALB)
 
-Create a VPC (CIDR: 10.0.0.0/16)
+Routes traffic to private EC2 instances across multiple Availability Zones
 
-    One public subnet (CIDR: 10.0.1.0/24)
+Allows outbound internet access from private instances via a NAT Gateway
 
-    Internet Gateway + Route Table for internet access
+Uses modular and environment-based structure
 
-Security Group
+Stores Terraform state remotely with locking
 
-    Allow:
+🔹 Networking
+VPC with CIDR 10.0.0.0/16
 
-    SSH (port 22) only from your IP
+    2 Public subnets (e.g., 10.0.1.0/24, 10.0.2.0/24) across 2 AZs
 
-    HTTP (port 80) from anywhere
+    2 Private subnets (e.g., 10.0.11.0/24, 10.0.12.0/24) across same 2 AZs
 
-EC2 Instance
+    Internet Gateway attached to VPC
 
-    Amazon Linux 2023 or Ubuntu
+    NAT Gateway in each public subnet for private subnet egress
 
-    Install NGINX (via user_data)
+    Route tables set up properly
 
-    Output the public IP
+🔹 Compute (App Layer)
+2 EC2 instances in private subnets (across AZs)
 
-    Tag resources meaningfully
+    Use the same NGINX install_nginx.sh script for now
 
-    Key Pair
+🔹 Load Balancer
+Application Load Balancer in public subnets
 
-    Create or use an existing key pair (don't commit private key!)
+    Target group with private EC2s
 
-    Outputs
+    Health checks on port 80
 
-    Public IP of EC2
+    Listener on HTTP port 80
 
-    VPC ID and Subnet ID
+🔹 Security Groups
+ALB SG: Allow inbound 80 from internet
+
+    EC2 SG: Allow inbound 80 only from ALB SG (not public)
+
+    Outbound rules should allow internet for update/downloads
+
+🔹 Backend + Config
+Use remote backend (S3 + DynamoDB locking)
+
+    Modular structure for VPC, EC2, SG, ALB, NAT
+
+    environments/PROD/ should drive the deployment
 
 
-    ` terraform plan -var-file="prod.tfvars" `
-
-![alt text](image.png)
+                        +----------------------------+
+                        |     Internet Gateway       |
+                        +-------------+--------------+
+                                      |
+                        +-------------v-------------+
+                        |     Public Subnet(s)      |
+                        |  (ALB + NAT Gateway)      |
+                        +-------------+-------------+
+                                      |
+                        +-------------v-------------+
+                        |     Private Subnet(s)     |
+                        |     (EC2 App Instances)   |
+                        +---------------------------+
