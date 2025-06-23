@@ -12,7 +12,6 @@ module "subnets" {
   subnet = var.subnet
 }
 
-
 module "internet_gatweway" {
   source = "../../modules/igw"
 
@@ -40,4 +39,15 @@ module "routeTables" {
   public_subnets  = module.subnets.public_subnet_ids
   private_subnets = module.subnets.private_subnet_ids
   nat_gateway     = local.nat_gateway_routeTable
+}
+
+module "security_group" {
+  source = "../../modules/sg"
+
+  vpc_id = module.vpc.VPC_ID
+
+  security_group = var.security_group
+
+  rules = var.rules
+
 }
