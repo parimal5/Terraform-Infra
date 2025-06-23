@@ -18,3 +18,8 @@ module "internet_gatweway" {
 
   vpc_id = module.vpc.VPC_ID
 }
+
+module "elastic_ips" {
+  source      = "../../modules/elasticIP"
+  elastic_ips = var.elastic_ips
+}

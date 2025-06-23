@@ -24,3 +24,8 @@ variable "subnet" {
     type              = string
   }))
 }
+
+#/modules/elasticIp
+variable "elastic_ips" {
+  type = map(string)
+}
