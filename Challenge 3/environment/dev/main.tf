@@ -11,3 +11,10 @@ module "subnets" {
   vpc_id = module.vpc.VPC_ID
   subnet = var.subnet
 }
+
+
+module "internet_gatweway" {
+  source = "../../modules/igw"
+
+  vpc_id = module.vpc.VPC_ID
+}
