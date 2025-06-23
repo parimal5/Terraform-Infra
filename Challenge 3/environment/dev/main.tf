@@ -23,3 +23,11 @@ module "elastic_ips" {
   source      = "../../modules/elasticIP"
   elastic_ips = var.elastic_ips
 }
+
+module "nat_gatway" {
+  source = "../../modules/nat"
+
+  nat_gatways = local.nat_gatway
+
+  depends_on = [module.internet_gatweway]
+}

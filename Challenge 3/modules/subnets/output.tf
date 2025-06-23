@@ -1,10 +1,10 @@
 output "public_subnet_ids" {
-  value = [for key, value in aws_subnet.subnets : value.id if value.tags["type"] == "public"]
+  value = { for key, value in aws_subnet.subnets : key => value.id if value.tags["type"] == "public" }
 }
 
 output "private_subnet_ids" {
-  value = [for k, v in aws_subnet.subnets : v.id if v.tags["type"] == "private"]
+  value = { for key, value in aws_subnet.subnets : key => value.id if value.tags["type"] == "private" }
 }
 output "db_subnet_ids" {
-  value = [for k, v in aws_subnet.subnets : v.id if v.tags["type"] == "db"]
+  value = { for key, value in aws_subnet.subnets : key => value.id if value.tags["type"] == "db" }
 }

@@ -29,3 +29,4 @@ variable "subnet" {
 variable "elastic_ips" {
   type = map(string)
 }
+
