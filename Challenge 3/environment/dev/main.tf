@@ -31,3 +31,13 @@ module "nat_gatway" {
 
   depends_on = [module.internet_gatweway]
 }
+
+module "routeTables" {
+  source = "../../modules/route_tables"
+
+  vpc_id          = module.vpc.VPC_ID
+  igw_id          = module.internet_gatweway.IGW_ID
+  public_subnets  = module.subnets.public_subnet_ids
+  private_subnets = module.subnets.private_subnet_ids
+  nat_gateway     = local.nat_gateway_routeTable
+}
