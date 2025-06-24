@@ -42,4 +42,24 @@ locals {
       security_groups             = [module.security_group.security_group_ids["ec2-sg"]]
     }
   }
+  load_balancers = {
+    "alb-1" = {
+      name                       = "MyLB"
+      internal                   = false
+      load_balancer_type         = "application"
+      subnets                    = values(module.subnets.public_subnet_ids)
+      enable_deletion_protection = true
+      security_groups            = [module.security_group.security_group_ids["alb-sg"]]
+    }
+  }
+
+  lb_listener = {
+    "alb-1-listner" = {
+      load_balancer_arn = module.application_load_balancer.load_balancer_arn["alb-1"]
+      port              = 80
+      protocol          = "http"
+      type              = "forward"
+      target_group_arn  = module.application_load_balancer.target_group_arn["lb-tg-1"]
+    }
+  }
 }

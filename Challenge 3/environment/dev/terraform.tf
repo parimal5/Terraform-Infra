@@ -52,3 +52,21 @@ variable "rules" {
     security_group_name = optional(string)
   }))
 }
+
+
+# module/alb
+
+variable "lb_target_group" {
+  type = map(object({
+    name                = string
+    port                = number
+    protocol            = string
+    target_type         = string
+    path                = string
+    interval            = number
+    timeout             = number
+    healthy_threshold   = number
+    unhealthy_threshold = number
+    matcher             = string
+  }))
+}

@@ -56,3 +56,13 @@ module "ec2_instance" {
 
   ec2_instance = local.ec2_instance
 }
+
+
+module "application_load_balancer" {
+  source = "../../modules/alb"
+
+  vpc_id          = module.vpc.VPC_ID
+  load_balancers  = local.load_balancers
+  lb_target_group = var.lb_target_group
+  lb_listener     = local.lb_listener
+}
