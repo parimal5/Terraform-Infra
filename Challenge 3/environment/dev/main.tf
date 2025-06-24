@@ -49,5 +49,10 @@ module "security_group" {
   security_group = var.security_group
 
   rules = var.rules
+}
 
+module "ec2_instance" {
+  source = "../../modules/ec2"
+
+  ec2_instance = local.ec2_instance
 }

@@ -45,9 +45,9 @@ variable "rules" {
   type = map(object({
     name                = string
     direction           = string # "ingress" or "egress"
+    ip_protocol         = string
     from_port           = number
     to_port             = number
-    ip_protocol         = string
     cidr_ipv4           = optional(string)
     security_group_name = optional(string)
   }))

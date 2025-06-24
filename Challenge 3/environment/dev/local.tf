@@ -18,4 +18,28 @@ locals {
       nat_gateway_ids = module.nat_gatway.NAT_ID["nat-2"]
     }
   }
+
+
+  ec2_instance = {
+    "ec2_instance_1" = {
+      instance_type               = "t3.micro"
+      key_name                    = "mykey.pem"
+      volume_type                 = "gp3"
+      monitoring                  = true
+      associate_public_ip_address = true
+      volume_size                 = 8
+      subnet_id                   = module.subnets.public_subnet_ids["public-subnet-1"]
+      security_groups             = [module.security_group.security_group_ids["ec2-sg"]]
+    },
+    "ec2_instance_2" = {
+      instance_type               = "t3.micro"
+      key_name                    = "mykey.pem"
+      volume_type                 = "gp3"
+      monitoring                  = true
+      associate_public_ip_address = true
+      volume_size                 = 8
+      subnet_id                   = module.subnets.public_subnet_ids["public-subnet-2"]
+      security_groups             = [module.security_group.security_group_ids["ec2-sg"]]
+    }
+  }
 }
